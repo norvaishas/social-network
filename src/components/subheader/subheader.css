@@ -1,0 +1,11 @@
+header {
+    width: 100%;
+    grid-area: header;
+    align-self: center;
+    justify-self: center;
+    background-color: steelblue;
+}
+
+.subheader {
+    grid-area: subheader;
+}

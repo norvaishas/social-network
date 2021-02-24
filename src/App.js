@@ -1,12 +1,17 @@
 import React from 'react';
 import './App.css';
+import Header from './components/header/Header';
+import Navbar from './components/navbar/Navbar';
+import Profile from './components/profile/Profile';
+import Subheader from './components/subheader/Subheader';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello world</h1>
-      </header>
+    <div className="app">
+      <Header/>
+      <Subheader/>
+      <Navbar/>
+      <Profile/>
     </div>
   );
 }
