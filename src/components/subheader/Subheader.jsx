@@ -1,9 +1,9 @@
 import React from 'react';
-import './subheader.css';
+import style from './Subheader.module.css';
 
 const Subheader = () => {
   return (
-    <div className="subheader">Subheader</div>
+    <div className={style.subheader}>Subheader</div>
   )
 }
 

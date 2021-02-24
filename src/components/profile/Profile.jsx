@@ -1,11 +1,11 @@
 import React from 'react';
-import './profile.css';
+import style from './Profile.module.css';
 
 const Profile = () => {
   return (
-    <section>
-      <h2>Hey world!</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, dolorem error esse facere fuga harum illum
+    <section className={style.profile}>
+      <h2 className="title">Hey world!</h2>
+      <p className={style.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, dolorem error esse facere fuga harum illum
         iure nemo neque odit quam quos sed temporibus vel vitae! Aliquam animi, architecto aut blanditiis commodi
         consectetur culpa cum delectus deserunt dolor ea earum eius expedita fugit labore maxime modi nesciunt obcaecati
         pariatur perferendis perspiciatis possimus quasi qui sed temporibus, totam, unde. Architecto assumenda

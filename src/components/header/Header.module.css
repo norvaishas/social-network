@@ -1,4 +1,5 @@
-header {
+
+.header {
     width: 100%;
     grid-area: header;
     align-self: center;
@@ -6,6 +7,6 @@ header {
     background-color: steelblue;
 }
 
-.subheader {
-    grid-area: subheader;
+h2 {
+    text-align: center;
 }

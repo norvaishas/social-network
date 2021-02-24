@@ -1,0 +1,5 @@
+.subheader {
+    grid-area: subheader;
+    /*text-align: right;*/
+    padding: 15px 100px;
+}
