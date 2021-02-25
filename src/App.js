@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Subheader from './components/Subheader/Subheader';
+import Dialogs from './components/Dialogs/Dialogs';
 
 const posts = [
   {text: 'Post 1'},
@@ -21,7 +22,10 @@ function App() {
       <Header/>
       <Subheader/>
       <Navbar/>
-      <Profile posts={posts}/>
+      <div className='content'>
+        <Profile posts={posts}/>
+        <Dialogs/>
+      </div>
     </div>
   );
 }

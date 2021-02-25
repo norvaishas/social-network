@@ -7,5 +7,10 @@
     grid-template-areas:
     "header header"
     "subheader subheader"
-    "navbar profile";
+    "navbar content";
+}
+
+.content {
+    grid-area: content;
+    background-color: grey;
 }
