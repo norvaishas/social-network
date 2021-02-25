@@ -5,28 +5,26 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Subheader from './components/Subheader/Subheader';
 import Dialogs from './components/Dialogs/Dialogs';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-const posts = [
-  {text: 'Post 1'},
-  {text: 'Post 2'},
-  {text: 'Post 3'},
-  {text: 'Post 4'},
-  {text: 'Post 5'},
-  {text: 'Post 6'},
-  {text: 'Post 7'}
-]
 
 function App() {
   return (
-    <div className="app">
-      <Header/>
-      <Subheader/>
-      <Navbar/>
-      <div className='content'>
-        <Profile posts={posts}/>
-        <Dialogs/>
+    <Router>
+      <div className="app">
+        <Header/>
+        <Subheader/>
+        <Navbar/>
+        <div className='content'>
+          <Route exact path='/home' component={Profile}/>
+          <Route exact path='/dialogs' component={Dialogs}/>
+          <Route exact path='/music' component={() => <div>My music</div>}/>
+          <Route exact path='/friends' component={() => <div>Friends list</div>}/>
+          <Route exact path='/video' component={() => <div>My favorite videos</div>}/>
+          <Route exact path='/some' component={() => <div>My some</div>}/>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
