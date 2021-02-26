@@ -7,8 +7,8 @@ import Subheader from './components/Subheader/Subheader';
 import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-
-function App() {
+function App({ state }) {
+  const { posts, dialogs } = state;
   return (
     <Router>
       <div className="app">
@@ -16,10 +16,10 @@ function App() {
         <Subheader/>
         <Navbar/>
         <div className='content'>
-          <Route exact path='/home' component={Profile}/>
-          <Route exact path='/dialogs' component={Dialogs}/>
-          <Route exact path='/music' component={() => <div>My music</div>}/>
-          <Route exact path='/friends' component={() => <div>Friends list</div>}/>
+          <Route exact path='/home' render={() => <Profile posts={posts}/>}/>
+          <Route exact path='/dialogs' render={() => <Dialogs dialogs={dialogs}/>}/>
+          <Route exact path='/music' render={() => <div>My music</div>}/>
+          <Route exact path='/friends' render={() => <div>Friends list</div>}/>
           <Route exact path='/video' component={() => <div>My favorite videos</div>}/>
           <Route exact path='/some' component={() => <div>My some</div>}/>
         </div>
