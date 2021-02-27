@@ -17,4 +17,9 @@ const state = {
   ],
 };
 
+export const postsUpdate = (newPost) => {
+  state.posts.push({ text: newPost});
+  console.log(state.posts);
+}
+
 export default state;
