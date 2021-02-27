@@ -1,6 +1,7 @@
 import { rerenderEntireTree } from '../render';
 
 const state = {
+  currentPostText: '',
   posts: [
     {text: 'Post 1'},
     {text: 'Post 2'},
@@ -19,9 +20,18 @@ const state = {
   ],
 };
 
-export const postsUpdate = (newPost) => {
-  state.posts.push({ text: newPost});
-  console.log(state.posts);
+export const postsUpdate = (/*newPost*/) => {
+  // state.posts.push({ text: newPost});
+  if (state.currentPostText === '') {
+    return;
+  }
+  state.posts.push({ text: state.currentPostText});
+  state.currentPostText = '';
+  rerenderEntireTree(state);
+}
+
+export const postTextUpdate = (newText) => {
+  state.currentPostText = newText;
   rerenderEntireTree(state);
 }
 
