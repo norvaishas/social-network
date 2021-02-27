@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from '../render';
+
 const state = {
   posts: [
     {text: 'Post 1'},
@@ -20,6 +22,7 @@ const state = {
 export const postsUpdate = (newPost) => {
   state.posts.push({ text: newPost});
   console.log(state.posts);
+  rerenderEntireTree(state);
 }
 
 export default state;
