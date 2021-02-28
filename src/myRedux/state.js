@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from '../render';
+let rerenderEntireTree = () => {
+  console.log('state was updated');
+};
 
 const state = {
   currentPostText: '',
@@ -33,6 +35,10 @@ export const postsUpdate = (/*newPost*/) => {
 export const postTextUpdate = (newText) => {
   state.currentPostText = newText;
   rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
 }
 
 export default state;
