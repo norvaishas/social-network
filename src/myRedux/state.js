@@ -1,6 +1,6 @@
-const store = {
+class Store {
 
-  _state: {
+  _state = {
     currentPostText: '',
     posts: [
       {text: 'Post 1'},
@@ -18,34 +18,36 @@ const store = {
       {name: 'HR-Google', message: 'Offer for Sergei...', time: 'Yesterday'},
       {name: 'User', message: 'Some text', time: '29 May 23:07'},
     ],
-  },
+  }
 
   _rerenderEntireTree() {
     console.log('_state was updated');
-  },
+  }
 
-  postsUpdate() {
+  postsUpdate = () => {
     if (this._state.currentPostText === '') {
       return;
     }
     this._state.posts.push({text: this._state.currentPostText});
     this._state.currentPostText = '';
     this._rerenderEntireTree(this._state);
-  },
+  }
 
-  postTextUpdate(newText) {
+  postTextUpdate = newText => {
     this._state.currentPostText = newText;
     this._rerenderEntireTree(this._state);
-  },
+  }
 
-  subscribe(observer) {
+  subscribe = observer => {
     this._rerenderEntireTree = observer;
-  },
+  }
 
-  getState() {
+  getState = () => {
     return this._state;
-  },
+  }
 
 }
+
+const store = new Store();
 
 export default store;
