@@ -20,26 +20,26 @@ class Store {
     ],
   }
 
-  _rerenderEntireTree() {
+  _callSubscriber() {
     console.log('_state was updated');
   }
 
-  postsUpdate = () => {
+  addPost = () => {
     if (this._state.currentPostText === '') {
       return;
     }
     this._state.posts.push({text: this._state.currentPostText});
     this._state.currentPostText = '';
-    this._rerenderEntireTree(this._state);
+    this._callSubscriber(this._state);
   }
 
-  postTextUpdate = newText => {
+  updateTextPost = newText => {
     this._state.currentPostText = newText;
-    this._rerenderEntireTree(this._state);
+    this._callSubscriber(this._state);
   }
 
   subscribe = observer => {
-    this._rerenderEntireTree = observer;
+    this._callSubscriber = observer;
   }
 
   getState = () => {
