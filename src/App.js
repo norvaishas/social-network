@@ -7,7 +7,7 @@ import Subheader from './components/Subheader/Subheader';
 import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-function App({ state, addPost, updateTextPost }) {
+function App({ state, dispatch, addPost, updateTextPost }) {
   const { posts, dialogs, currentPostText } = state;
   return (
     <Router>
@@ -19,6 +19,7 @@ function App({ state, addPost, updateTextPost }) {
           <Route exact path='/home' render={() =>
             <Profile
               posts={posts}
+              dispatch={dispatch}
               addPost={addPost}
               updateTextPost={updateTextPost}
               currentPostText={currentPostText}/>}

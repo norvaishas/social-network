@@ -24,18 +24,25 @@ class Store {
     console.log('_state was updated');
   }
 
-  addPost = () => {
-    if (this._state.currentPostText === '') {
-      return;
-    }
-    this._state.posts.push({text: this._state.currentPostText});
-    this._state.currentPostText = '';
-    this._callSubscriber(this._state);
-  }
+  dispatch = (action) => {
+    switch (action.type) {
+      case 'ADD_POST':
+        if (this._state.currentPostText === '') {
+          return;
+        }
+        this._state.posts.push({text: this._state.currentPostText});
+        this._state.currentPostText = '';
+        this._callSubscriber(this._state);
+        break;
 
-  updateTextPost = newText => {
-    this._state.currentPostText = newText;
-    this._callSubscriber(this._state);
+      case 'POST_TEXT_UPDATE':
+        this._state.currentPostText = action.payload;
+        this._callSubscriber(this._state);
+        break;
+
+      default:
+        console.log('nothing to change');
+    }
   }
 
   subscribe = observer => {

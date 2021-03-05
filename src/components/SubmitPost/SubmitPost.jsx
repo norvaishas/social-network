@@ -1,15 +1,15 @@
 import React from 'react';
 
-const SubmitPost = ({ addPost, updateTextPost, currentPostText }) => {
+const SubmitPost = ({ dispatch, currentPostText }) => {
 
   const newPostText = React.createRef();
 
   const createPost = () => {
-    addPost(newPostText.current.value);
+    dispatch({type: 'ADD_POST'});
   };
 
   const changePostText = () => {
-    updateTextPost(newPostText.current.value)
+    dispatch({type: 'POST_TEXT_UPDATE', payload: newPostText.current.value})
   };
 
   return (

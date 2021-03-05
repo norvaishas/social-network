@@ -11,6 +11,7 @@ const rerenderEntireTree = (state) => {
       <App state={state}
            addPost={store.addPost}
            updateTextPost={store.updateTextPost}
+           dispatch={store.dispatch}
       />
     </React.StrictMode>,
     document.getElementById('root')
