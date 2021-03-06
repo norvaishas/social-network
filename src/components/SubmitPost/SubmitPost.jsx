@@ -1,15 +1,15 @@
 import React from 'react';
+import {addPostActionCreator, postTextUpdateActionCreator} from '../../myRedux/state';
 
 const SubmitPost = ({ dispatch, currentPostText }) => {
-
   const newPostText = React.createRef();
 
   const createPost = () => {
-    dispatch({type: 'ADD_POST'});
+    dispatch(addPostActionCreator());
   };
 
   const changePostText = () => {
-    dispatch({type: 'POST_TEXT_UPDATE', payload: newPostText.current.value})
+    dispatch(postTextUpdateActionCreator(newPostText.current.value))
   };
 
   return (

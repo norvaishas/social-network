@@ -26,7 +26,7 @@ class Store {
 
   dispatch = (action) => {
     switch (action.type) {
-      case 'ADD_POST':
+      case ADD_POST:
         if (this._state.currentPostText === '') {
           return;
         }
@@ -35,7 +35,7 @@ class Store {
         this._callSubscriber(this._state);
         break;
 
-      case 'POST_TEXT_UPDATE':
+      case POST_TEXT_UPDATE:
         this._state.currentPostText = action.payload;
         this._callSubscriber(this._state);
         break;
@@ -54,6 +54,14 @@ class Store {
   }
 
 }
+
+// Constants
+const ADD_POST = 'ADD_POST';
+const POST_TEXT_UPDATE = 'POST_TEXT_UPDATE';
+
+// Action creators
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const postTextUpdateActionCreator = text => ({type: POST_TEXT_UPDATE, payload: text})
 
 const store = new Store();
 
