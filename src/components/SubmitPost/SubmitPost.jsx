@@ -4,7 +4,8 @@ import {addPostActionCreator, postTextUpdateActionCreator} from '../../myRedux/s
 const SubmitPost = ({ dispatch, currentPostText }) => {
   const newPostText = React.createRef();
 
-  const createPost = () => {
+  const createPost = (event) => {
+    event.preventDefault();
     dispatch(addPostActionCreator());
   };
 
@@ -12,11 +13,17 @@ const SubmitPost = ({ dispatch, currentPostText }) => {
     dispatch(postTextUpdateActionCreator(newPostText.current.value))
   };
 
+  const OnCtrlEnterPress = (event) => {
+    if (event.ctrlKey && event.keyCode === 13) {
+      createPost(event)
+    }
+  };
+
   return (
-    <>
-      <textarea onChange={changePostText} ref={newPostText}  value={currentPostText}/>
-      <button onClick={createPost}>Add post</button>
-    </>
+    <form onSubmit={createPost}>
+      <textarea onChange={changePostText} onKeyDown={OnCtrlEnterPress} ref={newPostText}  value={currentPostText}/>
+      <button>Add post</button>
+    </form>
   )
 }
 
