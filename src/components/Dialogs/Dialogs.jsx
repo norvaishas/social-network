@@ -1,33 +1,40 @@
 import React from 'react';
 import style from './Dialogs.module.css';
-import {NavLink} from 'react-router-dom';
+import CurrentDialog from '../current-dialog/current-dialog';
+import {selectDialogActionCreator} from '../../myRedux/state';
 
-const DialogItem = ({ dialog }) => {
-  const path = `/dialog/${dialog.name}`;
+const DialogItem = ({ lastMessage, dispatch }) => {
+
+  const onDialogSelected = (e, name) => {
+    if (e.target.innerText === name) {
+      dispatch(selectDialogActionCreator(name));
+    }
+  }
+
+  // const path = `/dialogs/${lastMessage.name}`;
+
   return (
-    <li className={style.lastMessage}>
-      <NavLink exact to={path}>
+    <li className={style.lastMessage} onClick={(e) => onDialogSelected(e, lastMessage.name)}>
+      {/*<NavLink to={path}>*/}
         <div className={style.lastMessageHeader}>
-          <div>{dialog.name}</div>
-          <div className={style.lastMessageTime}>{dialog.time}</div>
+          <div>{lastMessage.name}</div>
+          <div className={style.lastMessageTime}>{lastMessage.time}</div>
         </div>
-        <div className={style.lastMessageContent}>{dialog.message}</div>
-      </NavLink>
+        <div className={style.lastMessageContent}>{lastMessage.message}</div>
+      {/*</NavLink>*/}
     </li>
   )
 }
 
-const Dialogs = ({ dialogs }) => {
+const Dialogs = ({ lastMessages, selectedDialog, dispatch }) => {
   return (
     <div className={style.dialogsWrapper}>
 
       <ul className={style.dialogsList}>
-        {dialogs.map( dialog => <DialogItem dialog={dialog} key={dialog.time}/>)}
+        {lastMessages.map( lastMessage => <DialogItem lastMessage={lastMessage} key={lastMessage.time} dispatch={dispatch}/>)}
       </ul>
 
-      <div className={style.chat}>
-        Select a chat to display messages...
-      </div>
+      <CurrentDialog selectedDialog={selectedDialog}/>
     </div>
   )
 }
