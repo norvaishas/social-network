@@ -14,8 +14,8 @@ class Store {
       ],
     },
     messenger: {
-      selectedDialog: ['Select a chat to display messages...'],
-
+      selectedDialog: 'Select a chat to display messages...',
+      currentMessageText: '',
       dialogs: [
         {
           user: 'Carles',
@@ -85,6 +85,17 @@ class Store {
         this._callSubscriber(this._state);
         break;
 
+      case MESSAGE_TEXT_UPDATE:
+        this._state.messenger.currentMessageText = action.payload;
+        this._callSubscriber(this._state);
+        break;
+
+      case SEND_MESSAGE:
+        this._state.messenger.selectedDialog.push(action.payload);
+        this._state.messenger.currentMessageText = '';
+        this._callSubscriber(this._state);
+        break;
+
       default:
         console.log('nothing to change');
     }
@@ -109,12 +120,16 @@ const ADD_POST = 'ADD_POST';
 const POST_TEXT_UPDATE = 'POST_TEXT_UPDATE';
 
 const SELECT_DIALOG = 'SELECT_DIALOG';
+const MESSAGE_TEXT_UPDATE = 'MESSAGE_TEXT_UPDATE';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
 // Action creators
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const postTextUpdateActionCreator = text => ({type: POST_TEXT_UPDATE, payload: text})
 
 export const selectDialogActionCreator = userName => ({type: SELECT_DIALOG, payload: userName});
+export const messageTextUpdateActionCreator = text => ({type: MESSAGE_TEXT_UPDATE, payload: text});
+export const sendMessageActionCreator = newMessage => ({type: SEND_MESSAGE, payload: newMessage})
 
 const store = new Store();
 

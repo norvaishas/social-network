@@ -1,4 +1,5 @@
 .chat {
+    min-height: 80vh;
     background-color: #282c34;
     color: #91a3cd;
     border-left: 1px dashed #ece5e5;

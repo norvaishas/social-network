@@ -26,7 +26,7 @@ const DialogItem = ({ lastMessage, dispatch }) => {
   )
 }
 
-const Dialogs = ({ lastMessages, selectedDialog, dispatch }) => {
+const Dialogs = ({ lastMessages, selectedDialog, dispatch, currentMessageText }) => {
   return (
     <div className={style.dialogsWrapper}>
 
@@ -34,7 +34,11 @@ const Dialogs = ({ lastMessages, selectedDialog, dispatch }) => {
         {lastMessages.map( lastMessage => <DialogItem lastMessage={lastMessage} key={lastMessage.time} dispatch={dispatch}/>)}
       </ul>
 
-      <CurrentDialog selectedDialog={selectedDialog}/>
+      <CurrentDialog
+        selectedDialog={selectedDialog}
+        currentMessageText={currentMessageText}
+        dispatch={dispatch}
+      />
     </div>
   )
 }

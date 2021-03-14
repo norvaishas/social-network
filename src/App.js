@@ -8,9 +8,10 @@ import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App({ state, dispatch, lastMessages }) {
+  console.log(state);
   const { wall, messenger } = state;
   const {posts, currentPostText} = wall;
-  const { dialogs, selectedDialog } = messenger;
+  const { dialogs, selectedDialog, currentMessageText } = messenger;
   return (
     <Router>
       <div className="app">
@@ -30,6 +31,7 @@ function App({ state, dispatch, lastMessages }) {
                    <Dialogs
                      lastMessages={lastMessages}
                      selectedDialog={selectedDialog}
+                     currentMessageText={currentMessageText}
                      dispatch={dispatch}
                    />}/>
           <Route exact path='/music' render={() => <div>My music</div>}/>
