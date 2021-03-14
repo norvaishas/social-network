@@ -1,5 +1,5 @@
 import React from 'react';
-import {messageTextUpdateActionCreator, sendMessageActionCreator} from '../../myRedux/state';
+import {messageTextUpdateActionCreator, sendMessageActionCreator} from '../../myRedux/messenger-reducer';
 
 const SendMessage = ({currentMessageText, dispatch}) => {
 

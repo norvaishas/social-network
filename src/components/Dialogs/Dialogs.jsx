@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Dialogs.module.css';
 import CurrentDialog from '../current-dialog/current-dialog';
-import {selectDialogActionCreator} from '../../myRedux/state';
+import {selectDialogActionCreator} from '../../myRedux/messenger-reducer';
 
 const DialogItem = ({ lastMessage, dispatch }) => {
 

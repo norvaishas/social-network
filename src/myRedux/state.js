@@ -1,3 +1,6 @@
+import WallReducer from './wall-reducer';
+import MessengerReducer from './messenger-reducer';
+
 class Store {
 
   _state = {
@@ -64,41 +67,9 @@ class Store {
   }
 
   dispatch = (action) => {
-    switch (action.type) {
-      case ADD_POST:
-        if (this._state.wall.currentPostText === '') {
-          return;
-        }
-        this._state.wall.posts.push({text: this._state.wall.currentPostText});
-        this._state.wall.currentPostText = '';
-        this._callSubscriber(this._state);
-        break;
-
-      case POST_TEXT_UPDATE:
-        this._state.wall.currentPostText = action.payload;
-        this._callSubscriber(this._state);
-        break;
-
-      case SELECT_DIALOG:
-        this._state.messenger.selectedDialog =
-          this._state.messenger.dialogs.filter(dialog => dialog.user === action.payload)[0].messages;
-        this._callSubscriber(this._state);
-        break;
-
-      case MESSAGE_TEXT_UPDATE:
-        this._state.messenger.currentMessageText = action.payload;
-        this._callSubscriber(this._state);
-        break;
-
-      case SEND_MESSAGE:
-        this._state.messenger.selectedDialog.push(action.payload);
-        this._state.messenger.currentMessageText = '';
-        this._callSubscriber(this._state);
-        break;
-
-      default:
-        console.log('nothing to change');
-    }
+    this._state.wall = WallReducer(this._state.wall, action);
+    this._state.messenger = MessengerReducer(this._state.messenger, action);
+    this._callSubscriber(this._state);
   }
 
   subscribe = observer => {
@@ -114,22 +85,6 @@ class Store {
   }
 
 }
-
-// Constants
-const ADD_POST = 'ADD_POST';
-const POST_TEXT_UPDATE = 'POST_TEXT_UPDATE';
-
-const SELECT_DIALOG = 'SELECT_DIALOG';
-const MESSAGE_TEXT_UPDATE = 'MESSAGE_TEXT_UPDATE';
-const SEND_MESSAGE = 'SEND_MESSAGE';
-
-// Action creators
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const postTextUpdateActionCreator = text => ({type: POST_TEXT_UPDATE, payload: text})
-
-export const selectDialogActionCreator = userName => ({type: SELECT_DIALOG, payload: userName});
-export const messageTextUpdateActionCreator = text => ({type: MESSAGE_TEXT_UPDATE, payload: text});
-export const sendMessageActionCreator = newMessage => ({type: SEND_MESSAGE, payload: newMessage})
 
 const store = new Store();
 

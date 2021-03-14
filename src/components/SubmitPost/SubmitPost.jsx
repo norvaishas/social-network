@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostActionCreator, postTextUpdateActionCreator} from '../../myRedux/state';
+import {addPostActionCreator, postTextUpdateActionCreator} from '../../myRedux/wall-reducer';
 
 const SubmitPost = ({ dispatch, currentPostText }) => {
   const newPostText = React.createRef();
