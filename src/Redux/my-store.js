@@ -1,5 +1,5 @@
-import WallReducer from './wall-reducer';
-import MessengerReducer from './messenger-reducer';
+import wallReducer from './wall-reducer';
+import messengerReducer from './messenger-reducer';
 
 class Store {
 
@@ -67,8 +67,8 @@ class Store {
   }
 
   dispatch = (action) => {
-    this._state.wall = WallReducer(this._state.wall, action);
-    this._state.messenger = MessengerReducer(this._state.messenger, action);
+    this._state.wall = wallReducer(this._state.wall, action);
+    this._state.messenger = messengerReducer(this._state.messenger, action);
     this._callSubscriber(this._state);
   }
 
