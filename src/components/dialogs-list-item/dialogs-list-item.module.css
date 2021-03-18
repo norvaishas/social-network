@@ -1,13 +1,4 @@
 
-.dialogsWrapper {
-    display: grid;
-    grid-template-columns: minmax(100px, 1fr) 2fr;
-}
-
-.dialogsList {
-    background-color: #282c34;
-}
-
 .lastMessage {
     border-bottom: #ece5e5 dotted 1px;
 }

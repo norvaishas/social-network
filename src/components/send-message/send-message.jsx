@@ -1,11 +1,9 @@
 import React from 'react';
-import {messageTextUpdateActionCreator, sendMessageActionCreator} from '../../Redux/messenger-reducer';
-
-const SendMessage = ({currentMessageText, dispatch}) => {
+const SendMessage = ({ currentMessageText, addMessage, messageTextUpdate }) => {
 
   const changeMessageText = (e) => {
     const currentText = e.target.value;
-    dispatch(messageTextUpdateActionCreator(currentText));
+    messageTextUpdate(currentText);
   }
 
   const sendMessage = (e) => {
@@ -15,7 +13,7 @@ const SendMessage = ({currentMessageText, dispatch}) => {
       message: currentMessageText,
       time: new Date().getSeconds()
     }
-    dispatch(sendMessageActionCreator(newMessage));
+    addMessage(newMessage);
   }
 
   const onCtrlEnterPress = (e) => {
