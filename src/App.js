@@ -7,7 +7,7 @@ import Subheader from './components/Subheader/Subheader';
 import DialogsList from './components/dialogs-list/dialogs-list';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-function App({store}) {
+function App() {
   return (
     <Router>
       <div className="app">
@@ -15,8 +15,8 @@ function App({store}) {
         <Subheader/>
         <Navbar/>
         <div className='content'>
-          <Route exact path='/home' render={() => <Profile store={store}/>}/>
-          <Route exact path='/dialogs' render={() => <DialogsList store={store}/>}/>
+          <Route exact path='/home' render={() => <Profile/>}/>
+          <Route exact path='/dialogs' render={() => <DialogsList/>}/>
           <Route exact path='/music' render={() => <div>My music</div>}/>
           <Route exact path='/friends' render={() => <div>Friends list</div>}/>
           <Route exact path='/video' component={() => <div>My favorite videos</div>}/>
