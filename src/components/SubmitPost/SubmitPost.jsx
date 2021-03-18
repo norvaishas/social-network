@@ -1,24 +1,6 @@
 import React from 'react';
-import {addPostActionCreator, postTextUpdateActionCreator} from '../../Redux/wall-reducer';
 
-const SubmitPost = ({ dispatch, currentPostText }) => {
-  const newPostText = React.createRef();
-
-  const createPost = (event) => {
-    event.preventDefault();
-    dispatch(addPostActionCreator());
-  };
-
-  const changePostText = () => {
-    dispatch(postTextUpdateActionCreator(newPostText.current.value))
-  };
-
-  const OnCtrlEnterPress = (event) => {
-    if (event.ctrlKey && event.keyCode === 13) {
-      createPost(event)
-    }
-  };
-
+const SubmitPost = ({ createPost, changePostText, OnCtrlEnterPress, currentPostText, newPostText }) => {
   return (
     <form onSubmit={createPost}>
       <textarea onChange={changePostText} onKeyDown={OnCtrlEnterPress} ref={newPostText}  value={currentPostText}/>

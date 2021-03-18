@@ -6,14 +6,9 @@ import App from './App';
 
 
 const rerenderEntireTree = (state) => {
-  console.log(state)
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state}
-           dispatch={store.dispatch}
-           // lastMessages={store.getLastMessages()} метод из my-store
-           lastMessages={store.getState().messenger.dialogs.map(dialog => dialog.messages[0])}
-      />
+      <App store={store}/>
     </React.StrictMode>,
     document.getElementById('root')
   );

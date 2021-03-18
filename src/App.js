@@ -7,11 +7,7 @@ import Subheader from './components/Subheader/Subheader';
 import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-function App({ state, dispatch, lastMessages }) {
-  console.log(state);
-  const { wall, messenger } = state;
-  const {posts, currentPostText} = wall;
-  const { dialogs, selectedDialog, currentMessageText } = messenger;
+function App({store}) {
   return (
     <Router>
       <div className="app">
@@ -19,21 +15,8 @@ function App({ state, dispatch, lastMessages }) {
         <Subheader/>
         <Navbar/>
         <div className='content'>
-          <Route exact path='/home' render={() =>
-            <Profile
-              posts={posts}
-              dispatch={dispatch}
-              currentPostText={currentPostText}/>}
-          />
-          <Route exact
-                 path='/dialogs'
-                 render={() =>
-                   <Dialogs
-                     lastMessages={lastMessages}
-                     selectedDialog={selectedDialog}
-                     currentMessageText={currentMessageText}
-                     dispatch={dispatch}
-                   />}/>
+          <Route exact path='/home' render={() => <Profile store={store}/>}/>
+          <Route exact path='/dialogs' render={() => <Dialogs store={store}/>}/>
           <Route exact path='/music' render={() => <div>My music</div>}/>
           <Route exact path='/friends' render={() => <div>Friends list</div>}/>
           <Route exact path='/video' component={() => <div>My favorite videos</div>}/>
