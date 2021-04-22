@@ -1,40 +1,22 @@
 import React from 'react';
-import style from './dialogs-list.module.css';
-import DialogsListItem from '../dialogs-list-item/dialogs-list-item';
-import { selectDialogActionCreator } from '../../Redux/messenger-reducer';
-import CurrentDialogContainer from '../containers/current-dialog-container';
-import StoreContext from '../../store-context';
+import SendMessage from '../send-message/send-message';
+import CurrentDialog from '../current-dialog/current-dialog';
 
-const DialogsList = () => {
+const DialogsList = ({selectedDialog, currentMessageText, messageTextUpdate, sendMessage}) => {
+
+  const form = Array.isArray(selectedDialog)
+    ? <SendMessage
+      currentMessageText={currentMessageText}
+      addMessage={sendMessage}
+      messageTextUpdate={messageTextUpdate} />
+    : null;
+
+  const content = selectedDialog !== 'Select a chat to display messages...'
+    ? selectedDialog.map(dialog => <p key={dialog.name}>{`${dialog.name}: ${dialog.message}`}</p> )
+    : <h2>{selectedDialog}</h2>
+
   return (
-    <StoreContext.Consumer>
-      {
-        (store) => {
-          const messenger = store.getState().messenger;
-          const { dialogs } = messenger;
-          const lastMessages = dialogs.map(dialog => dialog.messages[0]);
-
-          const selectDialog = name => store.dispatch(selectDialogActionCreator(name));
-
-          return (
-            <div className={style.dialogsWrapper}>
-              <ul className={style.dialogsList}>
-                {lastMessages.map(lastMessage => {
-                  return (
-                    <DialogsListItem
-                      key={lastMessage.time}
-                      lastMessage={lastMessage}
-                      selectDialog={selectDialog}
-                    />
-                  )
-                })}
-              </ul>
-              <CurrentDialogContainer store={store}/>
-            </div>
-          )
-        }
-      }
-    </StoreContext.Consumer>
+    <CurrentDialog content={content} form={form}/>
   )
 }
 
