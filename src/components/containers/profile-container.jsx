@@ -1,19 +1,12 @@
-import React from 'react';
-import StoreContext from '../../store-context';
 import Profile from '../Profile/Profile';
+import {connect} from 'react-redux';
 
-const ProfileContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {
-        (store) => {
-          return (
-            <Profile posts={store.getState().wall.posts} />
-          )
-        }
-      }
-    </StoreContext.Consumer>
-  )
+const mapStateToProps = (state) => {
+  return {
+    posts: state.wall.posts
+  }
 }
+
+const ProfileContainer = connect(mapStateToProps)(Profile)
 
 export default ProfileContainer;

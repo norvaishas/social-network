@@ -19,17 +19,20 @@ const initialState = {
 
 const wallReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
-      if (state.currentPostText === '') {
+    case ADD_POST: {
+      let stateCopy = {...state, posts: [...state.posts]};
+      if (stateCopy.currentPostText === '') {
         return;
       }
-      state.posts.push({text: state.currentPostText});
-      state.currentPostText = '';
-      return state;
+      stateCopy.posts.push({text: stateCopy.currentPostText});
+      stateCopy.currentPostText = '';
+      return stateCopy;
+    }
 
     case POST_TEXT_UPDATE:
-      state.currentPostText = action.payload;
-      return state;
+      let copyState = {...state};
+      copyState.currentPostText = action.payload;
+      return copyState;
 
     default:
       return state;

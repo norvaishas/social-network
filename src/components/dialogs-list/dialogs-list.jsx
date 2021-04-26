@@ -1,22 +1,24 @@
 import React from 'react';
-import SendMessage from '../send-message/send-message';
-import CurrentDialog from '../current-dialog/current-dialog';
+import style from './dialogs-list.module.css';
+import DialogsListItem from '../dialogs-list-item/dialogs-list-item';
 
-const DialogsList = ({selectedDialog, currentMessageText, messageTextUpdate, sendMessage}) => {
+const DialogsList = ({messenger, selectDialog}) => {
 
-  const form = Array.isArray(selectedDialog)
-    ? <SendMessage
-      currentMessageText={currentMessageText}
-      addMessage={sendMessage}
-      messageTextUpdate={messageTextUpdate} />
-    : null;
-
-  const content = selectedDialog !== 'Select a chat to display messages...'
-    ? selectedDialog.map(dialog => <p key={dialog.name}>{`${dialog.name}: ${dialog.message}`}</p> )
-    : <h2>{selectedDialog}</h2>
+  const { dialogs } = messenger;
+  const lastMessages = dialogs.map(dialog => dialog.messages[0]);
 
   return (
-    <CurrentDialog content={content} form={form}/>
+    <ul className={style.dialogsList}>
+      {lastMessages.map(lastMessage => {
+        return (
+          <DialogsListItem
+            key={lastMessage.time}
+            lastMessage={lastMessage}
+            selectDialog={selectDialog}
+          />
+        )
+      })}
+    </ul>
   )
 }
 
