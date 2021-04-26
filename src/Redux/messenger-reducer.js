@@ -54,23 +54,22 @@ const initialState = {
 const messengerReducer = (state = initialState, action) => {
   switch (action.type) {
     case SELECT_DIALOG:
-      let stateCopy = {...state};
-      stateCopy.selectedDialog =
-        stateCopy.dialogs.filter(dialog => dialog.user === action.payload)[0].messages;
-      return stateCopy;
+      return {
+        ...state,
+        selectedDialog : state.dialogs.filter(dialog => dialog.user === action.payload)[0].messages
+      };
 
-    case MESSAGE_TEXT_UPDATE: {
-      let stateCopy = {...state};
-      stateCopy.currentMessageText = action.payload;
-      return stateCopy;
-    }
+    case MESSAGE_TEXT_UPDATE:
+      return {
+        ...state,
+        currentMessageText : action.payload
+      };
 
-    case SEND_MESSAGE: {
-      let stateCopy = {...state};
-      stateCopy.selectedDialog.push(action.payload);
-      stateCopy.currentMessageText = '';
-      return stateCopy;
-    }
+    case SEND_MESSAGE:
+      return {
+        ...state,
+        selectedDialog: [...state.selectedDialog, action.payload]
+      };
 
     default:
       return state;
