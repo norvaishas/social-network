@@ -56,7 +56,7 @@ const messengerReducer = (state = initialState, action) => {
     case SELECT_DIALOG:
       return {
         ...state,
-        selectedDialog : state.dialogs.filter(dialog => dialog.user === action.payload)[0].messages
+        selectedDialog: state.dialogs.filter(dialog => dialog.user === action.payload)[0].messages
       };
 
     case MESSAGE_TEXT_UPDATE:
@@ -68,7 +68,8 @@ const messengerReducer = (state = initialState, action) => {
     case SEND_MESSAGE:
       return {
         ...state,
-        selectedDialog: [...state.selectedDialog, action.payload]
+        selectedDialog: [...state.selectedDialog, action.payload],
+        currentMessageText : ''
       };
 
     default:
