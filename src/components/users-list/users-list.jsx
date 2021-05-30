@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 
 const User = ({props}) => {
   const {followUser, unFollowUser, users} = props;
@@ -10,7 +12,7 @@ const User = ({props}) => {
             <img src="" alt=""/>
           </div>
           <div className="info">
-            <h3 className="login">{user.login}</h3>
+            {/*<h3 className="login">{user.login}</h3>*/}
             <span className="name">{user.name}</span>
           </div>
           <div className="buttons">
@@ -27,6 +29,19 @@ const User = ({props}) => {
   )
 }
 
-const UsersList = props => <User props={props}/>
+const UsersList = (props) => {
+
+  React.useEffect(() => {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+      .then((response) => {
+        props.setUsers(response.data.items)
+      })
+    return () => {
+      props.deleteUsers()
+    }
+  }, []);
+
+  return <User props={props}/>
+}
 
 export default UsersList;

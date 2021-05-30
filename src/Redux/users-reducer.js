@@ -1,19 +1,15 @@
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';
+const SET_USERS = 'SET_USERS';
+const DELETE_USERS = 'DELETE_USERS:';
 
 export const followUserAC = userId => ({type: FOLLOW_USER, payload: userId});
 export const unfollowUserAC = userId => ({type: UNFOLLOW_USER, payload: userId});
+export const setUsersAC = users => ({type: SET_USERS, payload: users});
+export const deleteUsersAC = users => ({type: DELETE_USERS, payload: users});
 
 const initialState = {
-  users: [
-    {id: 1, selected: false, followed: false, login: '@puyol5', name: 'Carles'},
-    {id: 2, selected: false, followed: false, login: '@world', name: 'Universe'},
-    {id: 3, selected: false, followed: true, login: '@ilon_mask', name: 'Ilon'},
-    {id: 4, selected: false, followed: false, login: '@google', name: 'HR-Google'},
-    {id: 5, selected: false, followed: true, login: '@user23', name: 'User-23'},
-    {id: 6, selected: false, followed: false, login: '@fathi_fcb', name: 'Fathi'},
-    {id: 7, selected: false, followed: true, login: '@merinda', name: 'Merissa'},
-  ],
+  users: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -22,7 +18,7 @@ const usersReducer = (state = initialState, action) => {
       // Обновление (редактирование) элементов
       return {
         ...state,
-        users: [...state.users].map( user => {
+        users: state.users.map( user => {
           if (user.id === action.payload) {
             return {...user, followed: true}
           }
@@ -42,6 +38,19 @@ const usersReducer = (state = initialState, action) => {
           ...state.users.slice(updatedUserIdx + 1)
         ]
       };
+
+    case SET_USERS:
+      return {
+        ...state,
+        users: [...state.users, ...action.payload]
+      }
+
+    case DELETE_USERS:
+      console.log('Пользователи очищены')
+      return {
+        ...state,
+        users: []
+      }
 
     default:
       return state;
