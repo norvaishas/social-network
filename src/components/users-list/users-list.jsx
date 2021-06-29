@@ -1,47 +1,37 @@
 import React from 'react';
 import axios from 'axios';
+import User from '../User/User';
+import Pagination from '../Pagination/Pagination';
 
+const UsersList = ({followUser, unFollowUser, fetchUsers, setUsers, setUsersCount, setCurrentPage, users, pagesCount, currentPage, loading}) => {
 
-const User = ({props}) => {
-  const {followUser, unFollowUser, users} = props;
-  return (
-    users.map(user => {
-      return (
-        <div className={'userWrapper'} key={user.id}>
-          <div className="photo">
-            <img src="" alt=""/>
-          </div>
-          <div className="info">
-            {/*<h3 className="login">{user.login}</h3>*/}
-            <span className="name">{user.name}</span>
-          </div>
-          <div className="buttons">
-            <button onClick={user.followed
-              ? () => unFollowUser(user.id)
-              : () => followUser(user.id)}>
-              {user.followed ? 'Unfollow' : 'Follow'}
-            </button>
-            <button>Message</button>
-          </div>
-        </div>
-      )
-    })
-  )
-}
+  const onPageChange = (pageNumber = 1) => {
+    fetchUsers();
 
-const UsersList = (props) => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=100&page=${pageNumber}`)
+      .then((response) => {
+        setUsers(response.data.items);
+        setUsersCount(response.data.totalCount);
+        setCurrentPage(pageNumber);
+      })
+      .catch((error) => console.log('Can\'t recieve data from server. Please check your Internet connection...'))
+  }
 
   React.useEffect(() => {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users')
-      .then((response) => {
-        props.setUsers(response.data.items)
-      })
-    return () => {
-      props.deleteUsers()
-    }
+    onPageChange();
   }, []);
 
-  return <User props={props}/>
+  const pages = [];
+  for (let page = 1; page <= pagesCount; page++) {
+    pages.push(page);
+  }
+
+  return (
+    <>
+      <Pagination pages={pages} currentPage={currentPage} onPageChange={onPageChange}/>
+      <User followUser={followUser} unFollowUser={unFollowUser} users={users} loading={loading}/>
+    </>
+  )
 }
 
 export default UsersList;

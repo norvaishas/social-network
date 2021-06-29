@@ -1,15 +1,25 @@
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';
-const SET_USERS = 'SET_USERS';
-const DELETE_USERS = 'DELETE_USERS:';
+const SET_USERS_COUNT = 'SET_USERS_COUNT';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
+const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
+const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 
 export const followUserAC = userId => ({type: FOLLOW_USER, payload: userId});
 export const unfollowUserAC = userId => ({type: UNFOLLOW_USER, payload: userId});
-export const setUsersAC = users => ({type: SET_USERS, payload: users});
-export const deleteUsersAC = users => ({type: DELETE_USERS, payload: users});
+export const fetchUsersAC = () => ({type: FETCH_USERS_REQUEST});
+export const setUsersAC = users => ({type: FETCH_USERS_SUCCESS, payload: users});
+export const setUsersCountAC = usersCount => ({type: SET_USERS_COUNT, payload: usersCount});
+export const setCurrentPageAC = pageNumber => ({type: SET_CURRENT_PAGE, payload: pageNumber});
+
 
 const initialState = {
   users: [],
+  pageSize: 100,
+  currentPage: 1,
+  loading: true,
+  error: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -39,17 +49,40 @@ const usersReducer = (state = initialState, action) => {
         ]
       };
 
-    case SET_USERS:
+    case SET_USERS_COUNT:
       return {
         ...state,
-        users: [...state.users, ...action.payload]
+        usersCount: action.payload,
+        pagesCount: Math.ceil(action.payload / state.pageSize)
       }
 
-    case DELETE_USERS:
-      console.log('Пользователи очищены')
+    case SET_CURRENT_PAGE:
       return {
         ...state,
-        users: []
+        currentPage: action.payload
+      }
+
+    case FETCH_USERS_REQUEST:
+      return {
+        ...state,
+        /*users: [],*/ // проверить поведение с и без (с - при запросе очищаться список, а что будет без?)
+        loading: true,
+        error: false
+      }
+
+    case FETCH_USERS_SUCCESS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
+        error: false
+      }
+
+    case FETCH_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true
       }
 
     default:
