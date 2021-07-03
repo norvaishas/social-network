@@ -3,7 +3,9 @@ import axios from 'axios';
 import User from '../User/User';
 import Pagination from '../Pagination/Pagination';
 
-const UsersList = ({followUser, unFollowUser, fetchUsers, setUsers, setUsersCount, setCurrentPage, users, pagesCount, currentPage, loading}) => {
+const UsersList = (props) => {
+  const {followUser, unFollowUser, fetchUsers, setUsers, setUsersCount,
+    setCurrentPage, users, pagesCount, currentPage, loading} = props;
 
   const onPageChange = (pageNumber = 1) => {
     fetchUsers();

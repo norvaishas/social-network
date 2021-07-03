@@ -6,12 +6,12 @@ const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
 const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 
-export const followUserAC = userId => ({type: FOLLOW_USER, payload: userId});
-export const unfollowUserAC = userId => ({type: UNFOLLOW_USER, payload: userId});
-export const fetchUsersAC = () => ({type: FETCH_USERS_REQUEST});
-export const setUsersAC = users => ({type: FETCH_USERS_SUCCESS, payload: users});
-export const setUsersCountAC = usersCount => ({type: SET_USERS_COUNT, payload: usersCount});
-export const setCurrentPageAC = pageNumber => ({type: SET_CURRENT_PAGE, payload: pageNumber});
+export const followUser = userId => ({type: FOLLOW_USER, payload: userId});
+export const unfollowUser = userId => ({type: UNFOLLOW_USER, payload: userId});
+export const fetchUsers = () => ({type: FETCH_USERS_REQUEST});
+export const setUsers = users => ({type: FETCH_USERS_SUCCESS, payload: users});
+export const setUsersCount = usersCount => ({type: SET_USERS_COUNT, payload: usersCount});
+export const setCurrentPage = pageNumber => ({type: SET_CURRENT_PAGE, payload: pageNumber});
 
 
 const initialState = {
