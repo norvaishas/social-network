@@ -4,3 +4,9 @@
     flex-direction: column;
     padding: 0 20px;
 }
+
+.ava {
+    width: 75%;
+    max-width: 200px;
+    margin: 0 auto 15px;
+}

@@ -16,12 +16,12 @@ function App() {
         <Subheader/>
         <Navbar/>
         <div className='content'>
-          <Route exact path='/home' render={() => <ProfileContainer/>}/>
-          <Route exact path='/dialogs' render={() => <DialogsContainer/>}/>
-          <Route exact path='/music' render={() => <div>My music</div>}/>
-          <Route exact path='/friends' render={() => <UsersContainer/>}/>
-          <Route exact path='/video' component={() => <div>My favorite videos</div>}/>
-          <Route exact path='/some' component={() => <div>My some</div>}/>
+          <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+          <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+          <Route path='/music' render={() => <div>My music</div>}/>
+          <Route path='/friends' render={() => <UsersContainer/>}/>
+          <Route path='/video' component={() => <div>My favorite videos</div>}/>
+          <Route path='/some' component={() => <div>My some</div>}/>
         </div>
       </div>
     </Router>

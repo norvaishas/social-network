@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className={style.navbar}>
       <ul>
-        <li><NavLink to='/home' activeClassName={style.activeLink}>My page</NavLink></li>
+        <li><NavLink to='/profile' activeClassName={style.activeLink}>My page</NavLink></li>
         <li><NavLink to='/friends' activeClassName={style.activeLink}>Friends</NavLink></li>
         <li><NavLink to='/music' activeClassName={style.activeLink}>Music</NavLink></li>
         <li><NavLink to='/dialogs' activeClassName={style.activeLink}>Message</NavLink></li>

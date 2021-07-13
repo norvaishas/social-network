@@ -1,6 +1,7 @@
 import React from 'react';
 import Preloader from '../Preloader/Preloader';
 import style from './User.module.css';
+import {NavLink} from 'react-router-dom';
 
 const User = ({followUser, unFollowUser, users, loading}) => {
   if (loading) {
@@ -19,9 +20,11 @@ const User = ({followUser, unFollowUser, users, loading}) => {
           <div className="info">
             <h3 className="login">{user.name}</h3>
           </div>
-          <div className={style.avatar}>
-            {avatar}
-          </div>
+          <NavLink to={'/profile/' + user.id}>
+            <div className={style.avatar}>
+              {avatar}
+            </div>
+          </NavLink>
           <div className={style.buttons}>
             <button onClick={user.followed
               ? () => unFollowUser(user.id)
